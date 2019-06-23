@@ -27,8 +27,8 @@ const routes: Routes = [
     data: {title: 'Редактировать товар'}
   },
   {
-    path: '',
-    redirectTo: '/products',
+    path: '**',
+    redirectTo: 'products',
     pathMatch: 'full'
   }
 ];
