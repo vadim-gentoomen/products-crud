@@ -11,6 +11,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
 import {ApiService} from './service/api.service';
+import {MockBackendModule} from './backend/mock-backend.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {ApiService} from './service/api.service';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
+    LoggerModule.forRoot({level: NgxLoggerLevel.ERROR}),
+    MockBackendModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

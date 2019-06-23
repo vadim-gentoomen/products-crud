@@ -1,12 +1,70 @@
 <div class="card">
 
   <div class="card-header">
-    <a class="float-left btn btn-dark btn-sm-2" [routerLink]="['/products']">Список товаров</a>
+    <a class="float-left btn btn-dark btn-sm-2"
+       [routerLink]="['/products']">
+      <i class="fa fa-fw fa-list-ol"></i>
+      <span> Список товаров</span>
+    </a>
   </div>
 
   <div class="card-body">
     <div class="col-sm-6">
-      TODO
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Наименование<span class="text-danger">*</span></label>
+          <input class="form-control"
+                 [ngClass]="{ 'is-invalid': controls.productName.dirty && controls.productName.errors }"
+                 type="text"
+                 formControlName="productName"
+                 placeholder="Наименование товара">
+          <div class="invalid-feedback"
+               *ngIf="controls.productName.dirty && controls.productName.errors">
+            <div *ngIf="controls.productName.errors.required">Обязательное поле</div>
+            <div *ngIf="controls.productName.errors.minlength">В названии не
+              менее {{controls.productName.errors.minlength.requiredLength}} символов
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Описание<span class="text-danger">*</span></label>
+          <input class="form-control"
+                 [ngClass]="{ 'is-invalid': controls.productDesc.dirty && controls.productDesc.errors }"
+                 type="text"
+                 formControlName="productDesc"
+                 placeholder="Описание товара">
+          <div class="invalid-feedback"
+               *ngIf="controls.productDesc.dirty && controls.productDesc.errors">
+            <div *ngIf="controls.productDesc.errors.required">Обязательное поле</div>
+            <div *ngIf="controls.productDesc.errors.minlength">В описании не
+              менее {{controls.productDesc.errors.minlength.requiredLength}} символов
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Цена<span class="text-danger">*</span></label>
+          <input class="form-control"
+                 [ngClass]="{ 'is-invalid': controls.productPrice.dirty && controls.productPrice.errors }"
+                 type="text"
+                 formControlName="productPrice"
+                 placeholder="Цена товара в рублях">
+          <div class="invalid-feedback"
+               *ngIf="controls.productPrice.dirty && controls.productPrice.errors">
+            <div *ngIf="controls.productPrice.errors.required">Обязательное поле</div>
+            <div *ngIf="controls.productPrice.errors.pattern">Только числовое значение (рубли.копейки)</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary" [disabled]="!productForm.valid">
+            <i class="fa fa-fw fa-sync"></i>
+            <span> Обновить товар</span>
+          </button>
+        </div>
+      </form>
+
     </div>
   </div>
 

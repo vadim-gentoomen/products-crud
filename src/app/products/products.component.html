@@ -1,7 +1,11 @@
 <div class="card">
 
   <div class="card-header">
-    <a class="float-left btn btn-dark btn-sm-2" [routerLink]="['/product-add']">Добавить товар</a>
+    <a class="float-left btn btn-dark btn-sm-2"
+       [routerLink]="['/product-add']">
+      <i class="fa fa-fw fa-trash"></i>
+      <span> Добавить товар</span>
+    </a>
   </div>
 
   <div class="card-body">
@@ -18,28 +22,33 @@
         </thead>
 
         <tbody>
-        <tr class="d-flex">
-          <td class="col-sm-1">1</td>
-          <td class="col-sm-7">Наименование</td>
-          <td class="col-sm-2">100</td>
+
+        <tr class="d-flex"
+            *ngFor="let row of (data$ | async); trackBy: trackByFn">
+          <td class="col-sm-1">{{row.id}}</td>
+          <td class="col-sm-7">{{row.productName}}</td>
+          <td class="col-sm-2">{{row.productPrice}} руб.</td>
           <td class="col-sm-2" align="center">
-            <a [routerLink]="['/product-add']"
+            <a [routerLink]="['/product-details/', row.id]"
                class="text-info"
                data-toggle="tooltip"
                title="Просмотр">
-              <i class="fa fa-fw fa-info-circle"></i></a> |
+              <i class="fa fa-fw fa-info-circle"></i>
+            </a> |
 
-            <a [routerLink]="['/product-add']"
+            <a [routerLink]="['/product-edit/', row.id]"
                class="text-primary"
                data-toggle="tooltip"
                title="Редактировать">
-              <i class="fa fa-fw fa-edit"></i></a> |
+              <i class="fa fa-fw fa-edit"></i>
+            </a> |
 
-            <a [routerLink]="['/product-add']"
-               class="text-danger"
+            <a class="text-danger"
                data-toggle="tooltip"
-               title="Удалить">
-              <i class="fa fa-fw fa-trash"></i></a>
+               title="Удалить"
+               (click)="deleteProduct(row.id)">
+              <i class="fa fa-fw fa-trash"></i>
+            </a>
           </td>
         </tr>
         </tbody>

@@ -1,13 +1,36 @@
 <div class="card">
 
   <div class="card-header">
-    <a class="float-left btn btn-dark btn-sm-2" [routerLink]="['/products']">Список товаров</a>
+    <a class="float-left btn btn-dark btn-sm-2"
+       [routerLink]="['/products']">
+      <i class="fa fa-fw fa-list-ol"></i>
+      <span> Список товаров</span></a>
   </div>
 
   <div class="card-body">
-    <div class="col-sm-6">
-      TODO
+    <div class="col-sm-8">
+      <div *ngIf="product; else empty">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <h5 class="card-title">{{product.productName}}</h5>
+          </li>
+          <li class="list-group-item">{{product.productDesc}}</li>
+          <li class="list-group-item">Цена: {{product.productPrice}} руб.</li>
+          <li class="list-group-item">Обновлено: {{product.updatedAt | date:'dd.MM.yyyy HH:mm'}}</li>
+          <li class="list-group-item">
+            <a class="float-left btn btn-warning btn-sm-2"
+               (click)="deleteProduct(product.id)">
+              <i class="fa fa-fw fa-trash"></i>
+              <span> Удалить</span></a>
+          </li>
+        </ul>
+
+      </div>
     </div>
+
+    <ng-template #empty>
+      <div class="alert alert-danger" role="alert">Товар не существует!</div>
+    </ng-template>
   </div>
 
 </div>
